@@ -34,7 +34,7 @@ export default function ConnectButton() {
   const [babyBalance, setBabyBalance] = useState<string>("0");
   const [mode, setMode] = useState<string>("BNB");
   const [recieverAdd, setRecieverAdd] = useState<string>("");
-  const [sendAmount, setSendAmount] = useState<number>(0);
+  const [sendAmount, setSendAmount] = useState<string>("0");
   const [gasFee, setGasFee] = useState<string>("");
   const [gasLimit, setGasLimit] = useState<number>(0);
   const toast = useToast();
@@ -48,11 +48,11 @@ export default function ConnectButton() {
     setMode(mode === "BNB" ? "BabyDoge" : "BNB");
   }
 
-  function handleChangeAddress(event: any) {
+  function handleChangeAddress(event: React.ChangeEvent<HTMLInputElement>) {
     setRecieverAdd(event.target.value);
   }
 
-  function handleChangeAmount(event: any) {
+  function handleChangeAmount(event: React.ChangeEvent<HTMLInputElement>) {
     setSendAmount(event.target.value);
   }
 
@@ -63,7 +63,7 @@ export default function ConnectButton() {
         status: "error",
       });
     }
-    if (!sendAmount || sendAmount === 0) {
+    if (!sendAmount || sendAmount === "0") {
       return toast({
         description: "Please input send amount",
         status: "error",
@@ -240,7 +240,7 @@ export default function ConnectButton() {
             <Input
               bg="#EBEBEB"
               size="lg"
-              value={recieverAdd}
+              value={recieverAdd || ''}
               onChange={handleChangeAddress}
             />
           </Box>
